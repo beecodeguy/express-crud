@@ -6,6 +6,7 @@ import pool from "./config/db.js";
 import errorHandler from "./middlewares/errorHandler.js";
 
 import userRoutes from "./routes/userRoute.js";
+import projectRoutes from "./routes/projectRoute.js";
 import createUserTable from "./data/createUserTable.js";
 
 dotenv.config();
@@ -13,6 +14,7 @@ dotenv.config();
 const app = express();
 
 const port = process.env.PORT || 8000;
+export const jwtSecret = process.env.JWT_SECRET || "defaultsecret";
 
 // middlewares
 app.use(express.json());
@@ -20,6 +22,7 @@ app.use(cors());
 
 //routes
 app.use("/api", userRoutes);
+app.use("/api/projects", projectRoutes);
 
 //error handling
 app.use(errorHandler);
